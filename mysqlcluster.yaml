@@ -1,0 +1,9 @@
+apiVersion: mysql.oracle.com/v2
+kind: MySQLCluster
+metadata:
+  name: my-mysql-cluster
+  namespace: exam
+spec:
+  replicas: 3
+  secretName: my-mysql-secret
+  size: Small
