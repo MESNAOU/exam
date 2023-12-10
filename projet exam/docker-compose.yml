@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysql-service:
+    image: 127.0.0.1:80/exam/mysql:5.7.44
+    container_name: mysql-db
+    ports:
+      - 3307:3306
+    networks:
+      - reseau
+    volumes:
+      - mysql-db-vol:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: testdb
+  backend:
+    image: 127.0.0.1:80/exam/mesnaoui/img-backend:1.0.0
+    container_name: backend
+    ports:
+      - 8080:8080
+    networks:
+      - reseau
+    depends_on:
+      - mysql-service
+  frontend:
+    image: 127.0.0.1:80/exam/mesnaoui/img-frontend:1.0.0
+    container_name: frontend
+    ports:
+      - 8081:80
+    networks:
+      - reseau
+    depends_on:
+      - backend
+networks:
+  reseau:
+    driver: bridge
+volumes:
+  mysql-db-vol:
+    driver: local
