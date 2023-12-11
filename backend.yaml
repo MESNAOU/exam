@@ -60,7 +60,7 @@ spec:
                   key: password  
           startupProbe:
             httpGet:
-              path: /actuator/health/startup
+              path: /actuator/info
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -68,7 +68,7 @@ spec:
 
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: 8080
             initialDelaySeconds: 3
             periodSeconds: 10
